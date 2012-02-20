@@ -1,13 +1,16 @@
 .row
-  .span8.offset2
+  .span6.offset2
     %h1 Food Generator
-    = form_tag '/generator/search', do |f|
-      = text_field_tag :budget
-      = select_tag :people, options_for_select(@people_range)
-      = button_tag :generate, :class => "btn primary"
+    = form_tag '/generator/search', :class => "well form-inline" do |f|
+      I want to spend
+      = text_field_tag :budget, nil, :placeholder => "ex. $20", :class => "input-small"
+      dollars to feed
+      = select_tag :people, options_for_select(@people_range), :class => "input-small"
+      people
+      = button_tag "Generate", :class => "btn primary btn-success"
 -if @results
   .row
-    .span8.offset2
+    .span6.offset2
       %table.table.table-striped.table-bordered
         %thead
           %tr

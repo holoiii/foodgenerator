@@ -1,4 +1,6 @@
 Foodgenerator::Application.routes.draw do
+  root :to => 'home#index'
+  match 'generator/search' => 'generator#search'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

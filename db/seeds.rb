@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+%w[Banana Apple Orange Pear Pizza Coffee Sandwich].each do |item|
+  Food.create(name: item, cost: rand(10), servings: rand(3), calories: rand(10) * 100, vegetarian: rand(2) == 1)
+end

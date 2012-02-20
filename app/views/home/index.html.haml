@@ -1,34 +1,34 @@
-.row
-  .span6.offset2
-    %h1 Food Generator
-    = form_tag '/generator/search', :class => "well form-inline" do |f|
-      I want to spend
-      = text_field_tag :budget, nil, :placeholder => "ex. $20", :class => "input-small"
-      dollars to feed
-      = select_tag :people, options_for_select(@people_range), :class => "input-small"
-      people
-      = button_tag "Generate", :class => "btn primary btn-success"
--if @results
+.container
   .row
-    .span6.offset2
-      %table.table.table-striped.table-bordered
-        %thead
-          %tr
-            %th
-              Name
-            %th
-              Price
-            %th
-              Servings
-            %th
-              Calories
-            %th
-              Vegetarian
-        %tbody
-          - @results.each do |item|
+    .span6.offset3
+      = form_tag '/generator/search', :class => "well form-inline" do |f|
+        I want to spend
+        = text_field_tag :budget, nil, :placeholder => "ex. $20", :class => "input-small"
+        dollars to feed
+        = select_tag :people, options_for_select(@people_range), :class => "input-small"
+        people
+        = button_tag "Generate", :class => "btn primary btn-success"
+  -if @results
+    .row
+      .span6.offset3
+        %table.table.table-striped.table-bordered
+          %thead
             %tr
-              %td= item.name
-              %td= item.cost
-              %td= item.servings
-              %td= item.calories
-              %td= item.vegetarian
+              %th
+                Name
+              %th
+                Price
+              %th
+                Servings
+              %th
+                Calories
+              %th
+                Vegetarian
+          %tbody
+            - @results.each do |item|
+              %tr
+                %td= item.name
+                %td= item.cost
+                %td= item.servings
+                %td= item.calories
+                %td= item.vegetarian

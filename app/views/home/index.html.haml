@@ -1,54 +1,28 @@
 .container
   .row
     .span6.offset3
-      = form_tag '/generator/search', :class => "well form-inline" do |f|
+      = form_tag '/generator/search', :class => "well form-inline", :id => "generate_form" do |f|
         I want to spend
         = text_field_tag :budget, @budget, :placeholder => "ex. $20", :class => "input-small"
         dollars to feed
         = select_tag :people, options_for_select(@people_range, @people), :class => "input-small"
         people
-        = button_tag "Generate", :class => "btn primary btn-success"
-  -if @results
-    .row
-      .span6.offset3
-        %table.table.table-striped.table-bordered
-          %thead
-            %tr
-              %th
-                Name
-              %th
-                Price
-              %th
-                Servings
-              %th
-                Calories
-              %th
-                Vegetarian
-          %tbody
-            - @results.each do |item|
-              %tr
-                %td= item.name
-                %td= item.cost
-                %td= item.servings
-                %td= item.calories
-                %td= item.vegetarian
-    .row
-      .span1.offset4
-        %h1
-          Totals:
-      .span4
-        %table.table.table-striped.table-bordered
-          %thead
-            %tr
-              %th
-                Total Cost
-              %th
-                Total Servings
-              %th
-                Total Calories
-          %tbody
-            %tr
-              %td= @total_cost
-              %td= @total_servings
-              %td= @total_calories
+        = button_tag "Generate", :class => "btn primary btn-success", :id => "search"
+  #results
 
+- content_for :js_footer do
+  :javascript
+    $(function() {
+      $("#search").on("click", function(e) {
+        e.preventDefault();
+        var form = $("#generate_form");
+        $.ajax({
+          url: form.prop("action"),
+          data: form.serialize(),
+          success: function(data){
+            $("#results").empty();
+            $("#results").append(data);
+          }
+        });
+      });
+    });

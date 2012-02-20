@@ -1,0 +1,42 @@
+.row
+  .span6.offset3
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th
+            Name
+          %th
+            Price
+          %th
+            Servings
+          %th
+            Calories
+          %th
+            Vegetarian
+      %tbody
+        - @results.each do |item|
+          %tr
+            %td= item.name
+            %td= item.cost
+            %td= item.servings
+            %td= item.calories
+            %td= item.vegetarian
+.row
+  .span1.offset4
+    %h1
+      Totals:
+  .span4
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th
+            Total Cost
+          %th
+            Total Servings
+          %th
+            Total Calories
+      %tbody
+        %tr
+          %td= @total_cost
+          %td= @total_servings
+          %td= @total_calories
